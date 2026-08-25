@@ -1,0 +1,106 @@
+const PTO_LIMIT=112;
+const months=[{year:2026,month:9,name:"October"},{year:2026,month:10,name:"November"},{year:2026,month:11,name:"December"}];
+
+const schoolDates=new Set([
+"2026-10-19","2026-10-20","2026-10-21","2026-10-22","2026-10-23",
+"2026-11-25","2026-11-26","2026-11-27",
+"2026-12-21","2026-12-22","2026-12-23","2026-12-24","2026-12-25",
+"2026-12-26","2026-12-27","2026-12-28","2026-12-29","2026-12-30","2026-12-31"
+]);
+
+const companyHolidays=new Set(["2026-11-26","2026-11-27","2026-12-25"]);
+
+// Starting proposed plan. December is intentionally tentative.
+const defaultPTO=new Set([
+"2026-10-19","2026-10-20","2026-10-21","2026-10-22","2026-10-23",
+"2026-11-23","2026-11-24",
+"2026-12-15","2026-12-16",
+"2026-12-21","2026-12-22","2026-12-23","2026-12-24"
+]);
+
+const tentativeDates=new Set([
+"2026-12-15","2026-12-16","2026-12-21","2026-12-22","2026-12-23","2026-12-24"
+]);
+
+let pto=new Set(defaultPTO);
+let vegasReserved=false;
+
+function dateKey(y,m,d){return `${y}-${String(m+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;}
+function isOfficeDay(y,m,d){
+  const dt=new Date(Date.UTC(y,m,d));
+  const dow=dt.getUTCDay();
+  return dow>=1 && dow<=3 && dateKey(y,m,d)<="2026-12-16";
+}
+function labelFor(key){
+  if(companyHolidays.has(key)) return "HOLIDAY";
+  if(pto.has(key)) return tentativeDates.has(key) ? "TENTATIVE PTO" : "PTO";
+  if(schoolDates.has(key)) return "SCHOOL OFF";
+  if(isOfficeDay(...key.split("-").map(Number).map((v,i)=>i===1?v-1:v))) return "OFFICE";
+  return "";
+}
+function render(){
+  const root=document.getElementById("calendar");
+  root.innerHTML="";
+  months.forEach(({year,month,name})=>{
+    const box=document.createElement("section");
+    box.className="month";
+    box.innerHTML=`<h2>${name} ${year}</h2><div class="dow">${["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map(x=>`<div>${x}</div>`).join("")}</div><div class="days"></div>`;
+    const days=box.querySelector(".days");
+    const first=new Date(Date.UTC(year,month,1)).getUTCDay();
+    const count=new Date(Date.UTC(year,month+1,0)).getUTCDate();
+    for(let i=0;i<first;i++){const b=document.createElement("div");b.className="day blank";days.appendChild(b);}
+    for(let d=1;d<=count;d++){
+      const key=dateKey(year,month,d), dt=new Date(Date.UTC(year,month,d)), dow=dt.getUTCDay();
+      const el=document.createElement("button");
+      el.type="button"; el.className="day";
+      if(dow===0||dow===6)el.classList.add("weekend");
+      if(isOfficeDay(year,month,d))el.classList.add("office");
+      if(schoolDates.has(key))el.classList.add("school");
+      if(companyHolidays.has(key))el.classList.add("holiday");
+      if(pto.has(key))el.classList.add("pto");
+      if(tentativeDates.has(key)&&pto.has(key))el.classList.add("tentative");
+      const tag=labelFor(key);
+      el.innerHTML=`<span class="num">${d}</span>${tag?`<span class="tag">${tag}</span>`:""}`;
+      if(!companyHolidays.has(key))el.addEventListener("click",()=>togglePTO(key));
+      days.appendChild(el);
+    }
+    root.appendChild(box);
+  });
+  updateStats();
+}
+function togglePTO(key){
+  if(companyHolidays.has(key))return;
+  if(pto.has(key))pto.delete(key);
+  else{
+    if(pto.size*8>=PTO_LIMIT){alert("All 112 PTO hours are already allocated.");return;}
+    pto.add(key);
+  }
+  render();
+}
+function updateStats(){
+  const used=pto.size*8;
+  document.getElementById("balance").textContent=PTO_LIMIT-used;
+  document.getElementById("used").textContent=used;
+  document.getElementById("remaining").textContent=PTO_LIMIT-used;
+  document.getElementById("days").textContent=pto.size;
+  document.getElementById("family").textContent=calculateFamilyDays();
+}
+function calculateFamilyDays(){
+  const sorted=[...pto].sort();
+  if(!sorted.length)return 0;
+  let count=0;
+  sorted.forEach(k=>{
+    const [y,m,d]=k.split("-").map(Number);
+    const dt=new Date(Date.UTC(y,m-1,d));
+    const prev=new Date(dt);prev.setUTCDate(prev.getUTCDate()-1);
+    const prevKey=dateKey(prev.getUTCFullYear(),prev.getUTCMonth(),prev.getUTCDate());
+    if(!pto.has(prevKey))count+=1;
+  });
+  return count;
+}
+document.getElementById("resetBtn").addEventListener("click",()=>{pto=new Set(defaultPTO);render();});
+document.getElementById("vegasBtn").addEventListener("click",()=>{
+  vegasReserved=!vegasReserved;
+  document.getElementById("vegasBtn").textContent=vegasReserved?"Vegas day reserved ✓":"Reserve Vegas day";
+});
+render();

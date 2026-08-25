@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>2026 Family PTO Planner</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <div>
+        <div class="eyebrow">2026 FAMILY PTO PLANNER</div>
+        <h1>October–December 2026</h1>
+        <p>Plan PTO around HSE school breaks, company holidays, office days, family time, and Vegas.</p>
+      </div>
+      <div class="balance">
+        <span>PTO balance</span>
+        <strong id="balance">112</strong>
+        <small>hours remaining</small>
+      </div>
+    </header>
+
+    <section class="legend">
+      <span><i class="school"></i> Girls out of school</span>
+      <span><i class="holiday"></i> Company holiday</span>
+      <span><i class="pto"></i> Proposed PTO</span>
+      <span><i class="tentative"></i> Tentative / decision needed</span>
+      <span><i class="office"></i> Office day</span>
+    </section>
+
+    <section class="controls">
+      <button id="resetBtn" type="button">Reset proposed PTO</button>
+      <button id="vegasBtn" type="button">Reserve Vegas day</button>
+      <div class="help">Click a weekday to toggle PTO. PTO uses 8 hours.</div>
+    </section>
+
+    <section id="calendar" class="calendar"></section>
+
+    <section class="summary">
+      <article><strong id="used">0</strong><span>hours selected</span></article>
+      <article><strong id="remaining">112</strong><span>hours remaining</span></article>
+      <article><strong id="days">0</strong><span>PTO days selected</span></article>
+      <article><strong id="family">0</strong><span>family days from PTO blocks</span></article>
+    </section>
+
+    <section class="plan">
+      <h2>Current planning assumptions</h2>
+      <ul>
+        <li><b>Oct 19–23:</b> proposed PTO for HSE Fall Break.</li>
+        <li><b>Nov 23–24:</b> proposed PTO to extend Thanksgiving break.</li>
+        <li><b>Dec 15–16:</b> tentative PTO to eliminate two office days.</li>
+        <li><b>Dec 21–24:</b> tentative PTO, pending your wife's work schedule.</li>
+        <li><b>Vegas:</b> one PTO day remains reserved for a Friday or Monday; choose it separately.</li>
+        <li><b>Fridays:</b> generally avoided except the Vegas reservation.</li>
+      </ul>
+    </section>
+
+    <footer>
+      <span>HSE school dates and your company holidays are encoded in <code>app.js</code>.</span>
+      <span>Upload/overwrite these same files for future versions.</span>
+    </footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
