@@ -75,8 +75,16 @@ body{
   color:#e9d5ff;
 }
 
+.stat-group{
+  display:flex;
+  gap:12px;
+  position:relative;
+  z-index:1;
+  flex-wrap:wrap;
+}
+
 .balance{
-  min-width:165px;
+  min-width:140px;
   text-align:center;
   background:rgba(15,23,42,.42);
   border:1px solid rgba(255,255,255,.22);
@@ -121,7 +129,7 @@ body{
 .legend i.pto{background:var(--green)}
 .legend i.tentative{background:var(--yellow)}
 .legend i.office{background:var(--purple)}
-.legend .icon-key{font-size:15px}
+.legend-badge{width:18px!important;height:18px!important;font-size:11px!important;box-shadow:0 1px 4px rgba(15,23,42,.15)!important}
 
 .controls{
   display:flex;
@@ -251,12 +259,28 @@ body{
 .badges{
   position:absolute;
   top:3px;
-  right:4px;
+  right:3px;
   display:flex;
-  gap:1px;
-  font-size:10px;
-  line-height:1;
+  gap:2px;
 }
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:13px;
+  height:13px;
+  border-radius:50%;
+  font-size:8px;
+  font-weight:900;
+  line-height:1;
+  color:#fff;
+  box-shadow:0 0 0 1.5px rgba(255,255,255,.9);
+}
+
+.badge.school{background:var(--blue)}
+.badge.robertson{background:var(--pink)}
+.badge.holiday{background:var(--red)}
 
 .num{
   font-size:12px;
@@ -276,7 +300,7 @@ body{
 
 .summary{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:repeat(3,1fr);
   gap:10px;
   margin-top:18px;
 }
@@ -349,7 +373,7 @@ footer{
   .calendar{grid-template-columns:1fr}
   .summary{grid-template-columns:repeat(2,1fr)}
   .hero{align-items:stretch;flex-direction:column}
-  .balance{align-self:flex-start}
+  .stat-group{align-self:flex-start}
 }
 
 @media(max-width:480px){

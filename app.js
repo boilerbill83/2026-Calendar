@@ -41,9 +41,9 @@ function labelFor(key){
 }
 function badgesFor(key){
   let out="";
-  if(schoolDates.has(key)) out+=`<span title="Girls out of school">🏫</span>`;
-  if(robertsonOff.has(key)) out+=`<span title="Robertson Off">🧑‍⚕️</span>`;
-  if(companyHolidays.has(key)) out+=`<span title="Company holiday">🎉</span>`;
+  if(schoolDates.has(key)) out+=`<span class="badge school" title="Girls out of school">S</span>`;
+  if(robertsonOff.has(key)) out+=`<span class="badge robertson" title="Robertson Off">R</span>`;
+  if(companyHolidays.has(key)) out+=`<span class="badge holiday" title="Company holiday">H</span>`;
   return out?`<span class="badges">${out}</span>`:"";
 }
 function render(){
@@ -83,12 +83,24 @@ function togglePTO(key){
   }
   render();
 }
+function countOfficeDays(){
+  let count=0;
+  months.forEach(({year,month})=>{
+    const days=new Date(Date.UTC(year,month+1,0)).getUTCDate();
+    for(let d=1;d<=days;d++){
+      const key=dateKey(year,month,d);
+      if(isOfficeDay(year,month,d)&&!pto.has(key)&&!companyHolidays.has(key))count++;
+    }
+  });
+  return count;
+}
 function updateStats(){
   const used=pto.size*8;
   document.getElementById("balance").textContent=PTO_LIMIT-used;
   document.getElementById("used").textContent=used;
   document.getElementById("remaining").textContent=PTO_LIMIT-used;
   document.getElementById("days").textContent=pto.size;
+  document.getElementById("officeDays").textContent=countOfficeDays();
 }
 document.getElementById("resetBtn").addEventListener("click",()=>{pto=new Set(defaultPTO);render();});
 document.getElementById("vegasBtn").addEventListener("click",()=>{
