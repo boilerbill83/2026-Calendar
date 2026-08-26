@@ -272,6 +272,13 @@ body{
   background:linear-gradient(135deg,#22c55e 0 50%,#38bdf8 50% 100%);
 }
 
+.day.robertson.pto{
+  background:linear-gradient(135deg,#22c55e,#6ee7b7);
+  color:#052e16;
+  border-color:#db2777;
+  box-shadow:inset 0 0 0 2px #db2777;
+}
+
 .day.tentative.school{
   background:linear-gradient(135deg,#fbbf24 0 50%,#38bdf8 50% 100%);
 }

@@ -36,8 +36,8 @@ function isOfficeDay(y,m,d){
 }
 function labelFor(key){
   if(companyHolidays.has(key)) return "HOLIDAY";
-  if(robertsonOff.has(key)) return "ROBERTSON OFF";
   if(pto.has(key)) return tentativeDates.has(key) ? "TENTATIVE PTO" : "PTO";
+  if(robertsonOff.has(key)) return "ROBERTSON OFF";
   if(schoolDates.has(key)) return "SCHOOL OFF";
   if(isOfficeDay(...key.split("-").map(Number).map((v,i)=>i===1?v-1:v))) return "OFFICE";
   return "";
