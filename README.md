@@ -1,6 +1,6 @@
 # 2026 Family PTO Planner
 
-A standalone HTML/CSS/JavaScript calendar for planning October–December 2026 PTO around HSE school breaks and company holidays.
+A standalone HTML/CSS/JavaScript calendar for planning October–December 2026 PTO around HSE school breaks, company holidays, and family availability.
 
 ## GitHub Pages
 
