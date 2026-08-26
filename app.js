@@ -9,7 +9,7 @@ const schoolDates=new Set([
 
 const companyHolidays=new Set(["2026-11-26","2026-11-27","2026-12-25"]);
 
-const bossPTO=new Set([
+const robertsonOff=new Set([
 "2026-10-06",
 "2026-10-12","2026-10-13","2026-10-14","2026-10-15","2026-10-16",
 "2026-12-28","2026-12-29","2026-12-30","2026-12-31"
@@ -23,7 +23,6 @@ const defaultPTO=new Set([
 ]);;
 
 const tentativeDates=new Set([
-"2026-12-28","2026-12-29","2026-12-30","2026-12-31"
 ]);;
 
 let pto=new Set(defaultPTO);
@@ -37,7 +36,7 @@ function isOfficeDay(y,m,d){
 }
 function labelFor(key){
   if(companyHolidays.has(key)) return "HOLIDAY";
-  if(bossPTO.has(key)) return "BOSS PTO";
+  if(robertsonOff.has(key)) return "ROBERTSON OFF";
   if(pto.has(key)) return tentativeDates.has(key) ? "TENTATIVE PTO" : "PTO";
   if(schoolDates.has(key)) return "SCHOOL OFF";
   if(isOfficeDay(...key.split("-").map(Number).map((v,i)=>i===1?v-1:v))) return "OFFICE";
@@ -60,7 +59,7 @@ function render(){
       el.type="button"; el.className="day";
       if(dow===0||dow===6)el.classList.add("weekend");
       if(isOfficeDay(year,month,d))el.classList.add("office");
-      if(bossPTO.has(key))el.classList.add("boss");
+      if(robertsonOff.has(key))el.classList.add("robertson");
       if(schoolDates.has(key))el.classList.add("school");
       if(companyHolidays.has(key))el.classList.add("holiday");
       if(pto.has(key))el.classList.add("pto");
