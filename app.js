@@ -35,12 +35,16 @@ function isOfficeDay(y,m,d){
   return dow>=1 && dow<=3 && dateKey(y,m,d)<="2026-12-16";
 }
 function labelFor(key){
-  if(companyHolidays.has(key)) return "HOLIDAY";
   if(pto.has(key)) return tentativeDates.has(key) ? "TENTATIVE PTO" : "PTO";
-  if(robertsonOff.has(key)) return "ROBERTSON OFF";
-  if(schoolDates.has(key)) return "SCHOOL OFF";
   if(isOfficeDay(...key.split("-").map(Number).map((v,i)=>i===1?v-1:v))) return "OFFICE";
   return "";
+}
+function badgesFor(key){
+  let out="";
+  if(schoolDates.has(key)) out+=`<span title="Girls out of school">🏫</span>`;
+  if(robertsonOff.has(key)) out+=`<span title="Robertson Off">🧑‍⚕️</span>`;
+  if(companyHolidays.has(key)) out+=`<span title="Company holiday">🎉</span>`;
+  return out?`<span class="badges">${out}</span>`:"";
 }
 function render(){
   const root=document.getElementById("calendar");
@@ -59,13 +63,10 @@ function render(){
       el.type="button"; el.className="day";
       if(dow===0||dow===6)el.classList.add("weekend");
       if(isOfficeDay(year,month,d))el.classList.add("office");
-      if(robertsonOff.has(key))el.classList.add("robertson");
-      if(schoolDates.has(key))el.classList.add("school");
-      if(companyHolidays.has(key))el.classList.add("holiday");
       if(pto.has(key))el.classList.add("pto");
       if(tentativeDates.has(key)&&pto.has(key))el.classList.add("tentative");
       const tag=labelFor(key);
-      el.innerHTML=`<span class="num">${d}</span>${tag?`<span class="tag">${tag}</span>`:""}`;
+      el.innerHTML=`<span class="num">${d}</span>${badgesFor(key)}${tag?`<span class="tag">${tag}</span>`:""}`;
       if(!companyHolidays.has(key))el.addEventListener("click",()=>togglePTO(key));
       days.appendChild(el);
     }
