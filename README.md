@@ -37,4 +37,4 @@ The calendar data and proposed PTO are all in `app.js`, so future changes can be
 
 ## Important
 
-The December PTO is currently planned for December 28–31 because Michelle's boss is out that week.
+December PTO is confirmed for December 28–31 because Robertson is off that week.
