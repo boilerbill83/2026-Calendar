@@ -4,9 +4,8 @@ const months=[{year:2026,month:9,name:"October"},{year:2026,month:10,name:"Novem
 const schoolDates=new Set([
 "2026-10-19","2026-10-20","2026-10-21","2026-10-22","2026-10-23",
 "2026-11-25","2026-11-26","2026-11-27",
-"2026-12-21","2026-12-22","2026-12-23","2026-12-24","2026-12-25",
-"2026-12-26","2026-12-27","2026-12-28","2026-12-29","2026-12-30","2026-12-31"
-]);
+"2026-12-21","2026-12-22","2026-12-23","2026-12-24","2026-12-25"
+]);;
 
 const companyHolidays=new Set(["2026-11-26","2026-11-27","2026-12-25"]);
 
@@ -20,13 +19,12 @@ const bossPTO=new Set([
 const defaultPTO=new Set([
 "2026-10-19","2026-10-20","2026-10-21","2026-10-22","2026-10-23",
 "2026-11-23","2026-11-24",
-"2026-12-15","2026-12-16",
-"2026-12-21","2026-12-22","2026-12-23","2026-12-24"
-]);
+"2026-12-28","2026-12-29","2026-12-30","2026-12-31"
+]);;
 
 const tentativeDates=new Set([
-"2026-12-15","2026-12-16","2026-12-21","2026-12-22","2026-12-23","2026-12-24"
-]);
+"2026-12-28","2026-12-29","2026-12-30","2026-12-31"
+]);;
 
 let pto=new Set(defaultPTO);
 let vegasReserved=false;
@@ -91,20 +89,6 @@ function updateStats(){
   document.getElementById("used").textContent=used;
   document.getElementById("remaining").textContent=PTO_LIMIT-used;
   document.getElementById("days").textContent=pto.size;
-  document.getElementById("family").textContent=calculateFamilyDays();
-}
-function calculateFamilyDays(){
-  const sorted=[...pto].sort();
-  if(!sorted.length)return 0;
-  let count=0;
-  sorted.forEach(k=>{
-    const [y,m,d]=k.split("-").map(Number);
-    const dt=new Date(Date.UTC(y,m-1,d));
-    const prev=new Date(dt);prev.setUTCDate(prev.getUTCDate()-1);
-    const prevKey=dateKey(prev.getUTCFullYear(),prev.getUTCMonth(),prev.getUTCDate());
-    if(!pto.has(prevKey))count+=1;
-  });
-  return count;
 }
 document.getElementById("resetBtn").addEventListener("click",()=>{pto=new Set(defaultPTO);render();});
 document.getElementById("vegasBtn").addEventListener("click",()=>{

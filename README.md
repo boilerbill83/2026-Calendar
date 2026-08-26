@@ -32,9 +32,9 @@ The calendar data and proposed PTO are all in `app.js`, so future changes can be
 - HSE Thanksgiving break: November 25–27, 2026.
 - HSE Winter Break: December 21, 2026–January 1, 2027.
 - Company holidays in this view: November 26, November 27, December 25.
-- Proposed PTO: October 19–23, November 23–24, December 15–16, December 21–24.
+- Proposed PTO: October 19–23, November 23–24, December 28–31.
 - One separate PTO day is intended to remain reserved for a Friday or Monday Vegas trip.
 
 ## Important
 
-The December PTO is intentionally treated as tentative because the final choice depends on when your wife's boss is off.
+The December PTO is currently planned for December 28–31 because Michelle's boss is out that week.
