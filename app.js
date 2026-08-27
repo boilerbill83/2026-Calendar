@@ -23,16 +23,16 @@ const trainingDates=new Set([
 // Colts regular-season games, Oct-Dec 2026.
 const coltsGames={
 "2026-10-04":{opp:"WAS",time:"9:30a",home:false},
-"2026-10-11":{opp:"PIT",time:"1:00p",home:false},
-"2026-10-18":{opp:"TEN",time:"1:00p",home:true},
-"2026-10-25":{opp:"MIN",time:"1:00p",home:false},
-"2026-11-01":{opp:"JAX",time:"1:00p",home:false},
-"2026-11-08":{opp:"DAL",time:"1:00p",home:true},
-"2026-11-15":{opp:"MIA",time:"1:00p",home:true},
+"2026-10-11":{opp:"PIT",time:"1p",home:false},
+"2026-10-18":{opp:"TEN",time:"1p",home:true},
+"2026-10-25":{opp:"MIN",time:"1p",home:false},
+"2026-11-01":{opp:"JAX",time:"1p",home:false},
+"2026-11-08":{opp:"DAL",time:"1p",home:true},
+"2026-11-15":{opp:"MIA",time:"1p",home:true},
 "2026-11-19":{opp:"HOU",time:"8:15p",home:false},
-"2026-11-29":{opp:"NYG",time:"1:00p",home:true},
-"2026-12-13":{opp:"PHI",time:"1:00p",home:false},
-"2026-12-20":{opp:"TEN",time:"1:00p",home:false},
+"2026-11-29":{opp:"NYG",time:"1p",home:true},
+"2026-12-13":{opp:"PHI",time:"1p",home:false},
+"2026-12-20":{opp:"TEN",time:"1p",home:false},
 "2026-12-27":{opp:"CIN",time:"TBD",home:true}
 };
 
@@ -45,7 +45,6 @@ const defaultPTO=new Set([
 ]);;
 
 const tentativeDates=new Set([
-"2026-12-07","2026-12-08","2026-12-09"
 ]);;
 
 let pto=new Set(defaultPTO);
