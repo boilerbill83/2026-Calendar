@@ -15,6 +15,11 @@ const robertsonOff=new Set([
 "2026-12-28","2026-12-29","2026-12-30","2026-12-31"
 ]);
 
+// Mandatory work training. PTO cannot be taken on these dates.
+const trainingDates=new Set([
+"2026-10-12","2026-10-13","2026-10-14","2026-10-15"
+]);
+
 // Starting proposed plan. December is intentionally tentative.
 const defaultPTO=new Set([
 "2026-10-19","2026-10-20","2026-10-21","2026-10-22","2026-10-23",
@@ -35,6 +40,7 @@ function isOfficeDay(y,m,d){
   return dow>=1 && dow<=3 && dateKey(y,m,d)<="2026-12-16";
 }
 function labelFor(key){
+  if(trainingDates.has(key)) return "TRAINING";
   if(pto.has(key)) return tentativeDates.has(key) ? "TENTATIVE PTO" : "PTO";
   if(isOfficeDay(...key.split("-").map(Number).map((v,i)=>i===1?v-1:v))) return "OFFICE";
   return "";
@@ -63,11 +69,12 @@ function render(){
       el.type="button"; el.className="day";
       if(dow===0||dow===6)el.classList.add("weekend");
       if(isOfficeDay(year,month,d))el.classList.add("office");
+      if(trainingDates.has(key))el.classList.add("training");
       if(pto.has(key))el.classList.add("pto");
       if(tentativeDates.has(key)&&pto.has(key))el.classList.add("tentative");
       const tag=labelFor(key);
       el.innerHTML=`<span class="num">${d}</span>${badgesFor(key)}${tag?`<span class="tag">${tag}</span>`:""}`;
-      if(!companyHolidays.has(key))el.addEventListener("click",()=>togglePTO(key));
+      if(!companyHolidays.has(key)&&!trainingDates.has(key))el.addEventListener("click",()=>togglePTO(key));
       days.appendChild(el);
     }
     root.appendChild(box);
@@ -75,7 +82,7 @@ function render(){
   updateStats();
 }
 function togglePTO(key){
-  if(companyHolidays.has(key))return;
+  if(companyHolidays.has(key)||trainingDates.has(key))return;
   if(pto.has(key))pto.delete(key);
   else{
     if(pto.size*8>=PTO_LIMIT){alert("All 112 PTO hours are already allocated.");return;}
@@ -89,7 +96,7 @@ function countOfficeDays(){
     const days=new Date(Date.UTC(year,month+1,0)).getUTCDate();
     for(let d=1;d<=days;d++){
       const key=dateKey(year,month,d);
-      if(isOfficeDay(year,month,d)&&!pto.has(key)&&!companyHolidays.has(key))count++;
+      if((isOfficeDay(year,month,d)||trainingDates.has(key))&&!pto.has(key)&&!companyHolidays.has(key))count++;
     }
   });
   return count;

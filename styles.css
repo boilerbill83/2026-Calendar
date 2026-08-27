@@ -129,6 +129,7 @@ body{
 .legend i.pto{background:var(--green)}
 .legend i.tentative{background:var(--yellow)}
 .legend i.office{background:var(--purple)}
+.legend i.training{background:repeating-linear-gradient(135deg,#f97316,#f97316 4px,#fb923c 4px,#fb923c 8px)}
 .legend-badge{width:18px!important;height:18px!important;font-size:11px!important;box-shadow:0 1px 4px rgba(15,23,42,.15)!important}
 
 .controls{
@@ -254,6 +255,13 @@ body{
   background:linear-gradient(135deg,#fbbf24,#fde68a);
   color:#422006;
   border-color:#f59e0b;
+}
+
+.day.training{
+  background:repeating-linear-gradient(135deg,#f97316,#f97316 8px,#fb923c 8px,#fb923c 16px);
+  color:#431407;
+  border-color:#c2410c;
+  cursor:not-allowed;
 }
 
 .badges{
