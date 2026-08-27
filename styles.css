@@ -130,6 +130,7 @@ body{
 .legend i.tentative{background:var(--yellow)}
 .legend i.office{background:var(--purple)}
 .legend i.training{background:repeating-linear-gradient(135deg,#f97316,#f97316 4px,#fb923c 4px,#fb923c 8px)}
+.legend i.pi-planning{background:repeating-linear-gradient(135deg,#4338ca,#4338ca 4px,#6366f1 4px,#6366f1 8px)}
 .legend-badge{width:18px!important;height:18px!important;font-size:11px!important;border-radius:50%!important;box-shadow:0 1px 4px rgba(15,23,42,.15)!important}
 
 .controls{
@@ -265,6 +266,18 @@ body{
 }
 
 .day.training .tag{
+  font-size:5.5px;
+  letter-spacing:-.02em;
+}
+
+.day.pi-planning{
+  background:repeating-linear-gradient(135deg,#4338ca,#4338ca 8px,#6366f1 8px,#6366f1 16px);
+  color:#fff;
+  border-color:#3730a3;
+  cursor:not-allowed;
+}
+
+.day.pi-planning .tag{
   font-size:5.5px;
   letter-spacing:-.02em;
 }
