@@ -130,7 +130,8 @@ body{
 .legend i.tentative{background:var(--yellow)}
 .legend i.office{background:var(--purple)}
 .legend i.training{background:repeating-linear-gradient(135deg,#f97316,#f97316 4px,#fb923c 4px,#fb923c 8px)}
-.legend-badge{width:18px!important;height:18px!important;font-size:11px!important;box-shadow:0 1px 4px rgba(15,23,42,.15)!important}
+.legend-badge{width:18px!important;height:18px!important;font-size:11px!important;border-radius:50%!important;box-shadow:0 1px 4px rgba(15,23,42,.15)!important}
+.legend .game-key{font-size:12px;font-weight:800;color:#1e3a8a}
 
 .controls{
   display:flex;
@@ -214,7 +215,7 @@ body{
 }
 
 .day{
-  min-height:55px;
+  min-height:60px;
   border:1px solid #e2e8f0;
   border-radius:8px;
   background:#fff;
@@ -264,6 +265,11 @@ body{
   cursor:not-allowed;
 }
 
+.day.training .tag{
+  font-size:5.5px;
+  letter-spacing:-.02em;
+}
+
 .badges{
   position:absolute;
   top:3px;
@@ -301,6 +307,18 @@ body{
   line-height:9px;
   font-weight:950;
   margin-top:3px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.game{
+  display:block;
+  font-size:6.5px;
+  line-height:8px;
+  font-weight:800;
+  margin-top:1px;
+  color:#1e3a8a;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;

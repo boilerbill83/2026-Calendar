@@ -20,14 +20,32 @@ const trainingDates=new Set([
 "2026-10-12","2026-10-13","2026-10-14","2026-10-15"
 ]);
 
+// Colts regular-season games, Oct-Dec 2026.
+const coltsGames={
+"2026-10-04":{opp:"WAS",time:"9:30a",home:false},
+"2026-10-11":{opp:"PIT",time:"1:00p",home:false},
+"2026-10-18":{opp:"TEN",time:"1:00p",home:true},
+"2026-10-25":{opp:"MIN",time:"1:00p",home:false},
+"2026-11-01":{opp:"JAX",time:"1:00p",home:false},
+"2026-11-08":{opp:"DAL",time:"1:00p",home:true},
+"2026-11-15":{opp:"MIA",time:"1:00p",home:true},
+"2026-11-19":{opp:"HOU",time:"8:15p",home:false},
+"2026-11-29":{opp:"NYG",time:"1:00p",home:true},
+"2026-12-13":{opp:"PHI",time:"1:00p",home:false},
+"2026-12-20":{opp:"TEN",time:"1:00p",home:false},
+"2026-12-27":{opp:"CIN",time:"TBD",home:true}
+};
+
 // Starting proposed plan. December is intentionally tentative.
 const defaultPTO=new Set([
 "2026-10-19","2026-10-20","2026-10-21","2026-10-22","2026-10-23",
 "2026-11-23","2026-11-24",
+"2026-12-07","2026-12-08","2026-12-09",
 "2026-12-28","2026-12-29","2026-12-30","2026-12-31"
 ]);;
 
 const tentativeDates=new Set([
+"2026-12-07","2026-12-08","2026-12-09"
 ]);;
 
 let pto=new Set(defaultPTO);
@@ -52,6 +70,12 @@ function badgesFor(key){
   if(companyHolidays.has(key)) out+=`<span class="badge holiday" title="Company holiday">H</span>`;
   return out?`<span class="badges">${out}</span>`:"";
 }
+function gameTagFor(key){
+  const g=coltsGames[key];
+  if(!g) return "";
+  const where=g.home?"vs":"@";
+  return `<span class="game" title="${g.home?"Home":"Away"} game ${where} ${g.opp}, ${g.time}">${where} ${g.opp} ${g.time}</span>`;
+}
 function render(){
   const root=document.getElementById("calendar");
   root.innerHTML="";
@@ -73,7 +97,7 @@ function render(){
       if(pto.has(key))el.classList.add("pto");
       if(tentativeDates.has(key)&&pto.has(key))el.classList.add("tentative");
       const tag=labelFor(key);
-      el.innerHTML=`<span class="num">${d}</span>${badgesFor(key)}${tag?`<span class="tag">${tag}</span>`:""}`;
+      el.innerHTML=`<span class="num">${d}</span>${badgesFor(key)}${tag?`<span class="tag">${tag}</span>`:""}${gameTagFor(key)}`;
       if(!companyHolidays.has(key)&&!trainingDates.has(key))el.addEventListener("click",()=>togglePTO(key));
       days.appendChild(el);
     }
