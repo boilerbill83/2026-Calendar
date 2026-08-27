@@ -131,7 +131,6 @@ body{
 .legend i.office{background:var(--purple)}
 .legend i.training{background:repeating-linear-gradient(135deg,#f97316,#f97316 4px,#fb923c 4px,#fb923c 8px)}
 .legend-badge{width:18px!important;height:18px!important;font-size:11px!important;border-radius:50%!important;box-shadow:0 1px 4px rgba(15,23,42,.15)!important}
-.legend .game-key{font-size:12px;font-weight:800;color:#1e3a8a}
 
 .controls{
   display:flex;
