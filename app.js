@@ -27,7 +27,7 @@ const piPlanningDates=new Set([
 
 // Working from home instead of the office.
 const wfhDates=new Set([
-"2026-09-14","2026-09-15","2026-09-16","2026-09-17"
+"2026-09-14","2026-09-15","2026-09-16"
 ]);
 
 // Colts regular-season games, Sep-Dec 2026.
