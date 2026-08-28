@@ -129,6 +129,7 @@ body{
 .legend i.pto{background:var(--green)}
 .legend i.tentative{background:var(--yellow)}
 .legend i.office{background:var(--purple)}
+.legend i.wfh{background:linear-gradient(135deg,#ccfbf1,#99f6e4);border-color:#0d9488}
 .legend i.training{background:repeating-linear-gradient(135deg,#f97316,#f97316 4px,#fb923c 4px,#fb923c 8px)}
 .legend i.pi-planning{background:repeating-linear-gradient(135deg,#4338ca,#4338ca 4px,#6366f1 4px,#6366f1 8px)}
 .legend-badge{width:18px!important;height:18px!important;font-size:11px!important;border-radius:50%!important;box-shadow:0 1px 4px rgba(15,23,42,.15)!important}
@@ -165,7 +166,7 @@ body{
 
 .calendar{
   display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
   gap:18px;
 }
 
@@ -184,9 +185,10 @@ body{
   box-shadow:0 12px 28px rgba(30,41,59,.14);
 }
 
-.month:nth-child(1){border-top:6px solid #fb923c}
-.month:nth-child(2){border-top:6px solid #38bdf8}
-.month:nth-child(3){border-top:6px solid #a855f7}
+.month:nth-child(1){border-top:6px solid #10b981}
+.month:nth-child(2){border-top:6px solid #fb923c}
+.month:nth-child(3){border-top:6px solid #38bdf8}
+.month:nth-child(4){border-top:6px solid #a855f7}
 
 .month h2{
   font-size:19px;
@@ -194,11 +196,12 @@ body{
   padding:5px 8px;
   border-radius:9px;
   color:white;
-  background:linear-gradient(135deg,#f97316,#fb7185);
+  background:linear-gradient(135deg,#059669,#34d399);
 }
 
-.month:nth-child(2) h2{background:linear-gradient(135deg,#0284c7,#06b6d4)}
-.month:nth-child(3) h2{background:linear-gradient(135deg,#7c3aed,#ec4899)}
+.month:nth-child(2) h2{background:linear-gradient(135deg,#f97316,#fb7185)}
+.month:nth-child(3) h2{background:linear-gradient(135deg,#0284c7,#06b6d4)}
+.month:nth-child(4) h2{background:linear-gradient(135deg,#7c3aed,#ec4899)}
 
 .dow,.days{
   display:grid;
@@ -244,6 +247,13 @@ body{
 
 .day.office{
   box-shadow:inset 0 4px 0 var(--purple);
+}
+
+.day.wfh{
+  box-shadow:inset 0 4px 0 #0d9488;
+  background:linear-gradient(135deg,#ccfbf1,#99f6e4);
+  color:#134e4a;
+  border-color:#0d9488;
 }
 
 .day.pto{

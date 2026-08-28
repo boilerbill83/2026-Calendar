@@ -1,5 +1,5 @@
 const PTO_LIMIT=112;
-const months=[{year:2026,month:9,name:"October"},{year:2026,month:10,name:"November"},{year:2026,month:11,name:"December"}];
+const months=[{year:2026,month:8,name:"September"},{year:2026,month:9,name:"October"},{year:2026,month:10,name:"November"},{year:2026,month:11,name:"December"}];
 
 const schoolDates=new Set([
 "2026-10-19","2026-10-20","2026-10-21","2026-10-22","2026-10-23",
@@ -25,8 +25,16 @@ const piPlanningDates=new Set([
 "2026-12-07","2026-12-08","2026-12-09","2026-12-10"
 ]);
 
-// Colts regular-season games, Oct-Dec 2026.
+// Working from home instead of the office.
+const wfhDates=new Set([
+"2026-09-14","2026-09-15","2026-09-16","2026-09-17"
+]);
+
+// Colts regular-season games, Sep-Dec 2026.
 const coltsGames={
+"2026-09-13":{opp:"BAL",time:"1p",home:true},
+"2026-09-20":{opp:"KC",time:"8:20p",home:false},
+"2026-09-27":{opp:"HOU",time:"1p",home:true},
 "2026-10-04":{opp:"WAS",time:"9:30a",home:false},
 "2026-10-11":{opp:"PIT",time:"1p",home:false},
 "2026-10-18":{opp:"TEN",time:"1p",home:true},
@@ -64,6 +72,7 @@ function labelFor(key){
   if(trainingDates.has(key)) return "TRAINING";
   if(piPlanningDates.has(key)) return "PI PLANNING";
   if(pto.has(key)) return tentativeDates.has(key) ? "TENTATIVE PTO" : "PTO";
+  if(wfhDates.has(key)) return "WFH";
   if(isOfficeDay(...key.split("-").map(Number).map((v,i)=>i===1?v-1:v))) return "OFFICE";
   return "";
 }
@@ -96,7 +105,8 @@ function render(){
       const el=document.createElement("button");
       el.type="button"; el.className="day";
       if(dow===0||dow===6)el.classList.add("weekend");
-      if(isOfficeDay(year,month,d))el.classList.add("office");
+      if(isOfficeDay(year,month,d)&&!wfhDates.has(key))el.classList.add("office");
+      if(wfhDates.has(key))el.classList.add("wfh");
       if(trainingDates.has(key))el.classList.add("training");
       if(piPlanningDates.has(key))el.classList.add("pi-planning");
       if(pto.has(key))el.classList.add("pto");
@@ -125,7 +135,7 @@ function countOfficeDays(){
     const days=new Date(Date.UTC(year,month+1,0)).getUTCDate();
     for(let d=1;d<=days;d++){
       const key=dateKey(year,month,d);
-      if((isOfficeDay(year,month,d)||trainingDates.has(key)||piPlanningDates.has(key))&&!pto.has(key)&&!companyHolidays.has(key))count++;
+      if((isOfficeDay(year,month,d)||trainingDates.has(key)||piPlanningDates.has(key))&&!pto.has(key)&&!companyHolidays.has(key)&&!wfhDates.has(key))count++;
     }
   });
   return count;
