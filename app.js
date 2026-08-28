@@ -7,7 +7,7 @@ const schoolDates=new Set([
 "2026-12-21","2026-12-22","2026-12-23","2026-12-24","2026-12-25"
 ]);;
 
-const companyHolidays=new Set(["2026-11-26","2026-11-27","2026-12-25"]);
+const companyHolidays=new Set(["2026-09-07","2026-11-26","2026-11-27","2026-12-25"]);
 
 const robertsonOff=new Set([
 "2026-10-06",
@@ -73,6 +73,7 @@ function labelFor(key){
   if(piPlanningDates.has(key)) return "PI PLANNING";
   if(pto.has(key)) return tentativeDates.has(key) ? "TENTATIVE PTO" : "PTO";
   if(wfhDates.has(key)) return "WFH";
+  if(companyHolidays.has(key)) return "";
   if(isOfficeDay(...key.split("-").map(Number).map((v,i)=>i===1?v-1:v))) return "OFFICE";
   return "";
 }
@@ -105,7 +106,7 @@ function render(){
       const el=document.createElement("button");
       el.type="button"; el.className="day";
       if(dow===0||dow===6)el.classList.add("weekend");
-      if(isOfficeDay(year,month,d)&&!wfhDates.has(key))el.classList.add("office");
+      if(isOfficeDay(year,month,d)&&!wfhDates.has(key)&&!companyHolidays.has(key))el.classList.add("office");
       if(wfhDates.has(key))el.classList.add("wfh");
       if(trainingDates.has(key))el.classList.add("training");
       if(piPlanningDates.has(key))el.classList.add("pi-planning");
