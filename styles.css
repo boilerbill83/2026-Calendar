@@ -129,7 +129,6 @@ body{
 .legend i.pto{background:var(--green)}
 .legend i.tentative{background:var(--yellow)}
 .legend i.office{background:var(--purple)}
-.legend i.wfh{background:linear-gradient(135deg,#ccfbf1,#99f6e4);border-color:#0d9488}
 .legend i.training{background:repeating-linear-gradient(135deg,#f97316,#f97316 4px,#fb923c 4px,#fb923c 8px)}
 .legend i.pi-planning{background:repeating-linear-gradient(135deg,#4338ca,#4338ca 4px,#6366f1 4px,#6366f1 8px)}
 .legend-badge{width:18px!important;height:18px!important;font-size:11px!important;border-radius:50%!important;box-shadow:0 1px 4px rgba(15,23,42,.15)!important}
@@ -249,13 +248,6 @@ body{
   box-shadow:inset 0 4px 0 var(--purple);
 }
 
-.day.wfh{
-  box-shadow:inset 0 4px 0 #0d9488;
-  background:linear-gradient(135deg,#ccfbf1,#99f6e4);
-  color:#134e4a;
-  border-color:#0d9488;
-}
-
 .day.pto{
   background:linear-gradient(135deg,#22c55e,#6ee7b7);
   color:#052e16;
@@ -317,6 +309,7 @@ body{
 .badge.school{background:var(--blue)}
 .badge.robertson{background:var(--pink)}
 .badge.holiday{background:var(--red)}
+.badge.wfh{background:#0d9488}
 
 .num{
   font-size:12px;

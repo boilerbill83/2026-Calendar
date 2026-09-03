@@ -22,10 +22,11 @@ const trainingDates=new Set([
 
 // PI Planning. PTO cannot be taken on these dates.
 const piPlanningDates=new Set([
+"2026-09-14","2026-09-15","2026-09-16",
 "2026-12-07","2026-12-08","2026-12-09","2026-12-10"
 ]);
 
-// Working from home instead of the office.
+// Working from home (not blocking; shown as a badge only).
 const wfhDates=new Set([
 "2026-09-14","2026-09-15","2026-09-16"
 ]);
@@ -73,7 +74,6 @@ function labelFor(key){
   if(trainingDates.has(key)) return "TRAINING";
   if(piPlanningDates.has(key)) return "PI PLANNING";
   if(pto.has(key)) return tentativeDates.has(key) ? "TENTATIVE PTO" : "PTO";
-  if(wfhDates.has(key)) return "WFH";
   if(companyHolidays.has(key)) return "";
   if(isOfficeDay(...key.split("-").map(Number).map((v,i)=>i===1?v-1:v))) return "OFFICE";
   return "";
@@ -83,6 +83,7 @@ function badgesFor(key){
   if(schoolDates.has(key)) out+=`<span class="badge school" title="Girls out of school">S</span>`;
   if(robertsonOff.has(key)) out+=`<span class="badge robertson" title="Robertson Off">R</span>`;
   if(companyHolidays.has(key)) out+=`<span class="badge holiday" title="Company holiday">H</span>`;
+  if(wfhDates.has(key)) out+=`<span class="badge wfh" title="Working from home">W</span>`;
   return out?`<span class="badges">${out}</span>`:"";
 }
 function gameTagFor(key){
@@ -107,8 +108,7 @@ function render(){
       const el=document.createElement("button");
       el.type="button"; el.className="day";
       if(dow===0||dow===6)el.classList.add("weekend");
-      if(isOfficeDay(year,month,d)&&!wfhDates.has(key)&&!companyHolidays.has(key))el.classList.add("office");
-      if(wfhDates.has(key))el.classList.add("wfh");
+      if(isOfficeDay(year,month,d)&&!companyHolidays.has(key))el.classList.add("office");
       if(trainingDates.has(key))el.classList.add("training");
       if(piPlanningDates.has(key))el.classList.add("pi-planning");
       if(pto.has(key))el.classList.add("pto");
