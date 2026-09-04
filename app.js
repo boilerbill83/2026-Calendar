@@ -83,7 +83,6 @@ function badgesFor(key){
   if(schoolDates.has(key)) out+=`<span class="badge school" title="Girls out of school">S</span>`;
   if(robertsonOff.has(key)) out+=`<span class="badge robertson" title="Robertson Off">R</span>`;
   if(companyHolidays.has(key)) out+=`<span class="badge holiday" title="Company holiday">H</span>`;
-  if(wfhDates.has(key)) out+=`<span class="badge wfh" title="Working from home">W</span>`;
   return out?`<span class="badges">${out}</span>`:"";
 }
 function gameTagFor(key){
@@ -108,7 +107,7 @@ function render(){
       const el=document.createElement("button");
       el.type="button"; el.className="day";
       if(dow===0||dow===6)el.classList.add("weekend");
-      if(isOfficeDay(year,month,d)&&!companyHolidays.has(key))el.classList.add("office");
+      if(isOfficeDay(year,month,d)&&!companyHolidays.has(key)&&!wfhDates.has(key))el.classList.add("office");
       if(trainingDates.has(key))el.classList.add("training");
       if(piPlanningDates.has(key))el.classList.add("pi-planning");
       if(pto.has(key))el.classList.add("pto");
