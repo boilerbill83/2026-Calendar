@@ -126,6 +126,7 @@ body{
 
 .legend span{display:flex;align-items:center;gap:7px}
 .legend i{width:18px;height:18px;border-radius:5px;border:2px solid rgba(255,255,255,.8);box-shadow:0 1px 4px rgba(15,23,42,.15)}
+.legend i.today-swatch{background:#fff;border:3px solid #1d4ed8;box-shadow:none}
 .legend i.pto{background:var(--green)}
 .legend i.tentative{background:var(--yellow)}
 .legend i.office{background:var(--purple)}
@@ -319,6 +320,33 @@ body{
 .day.conflict{
   outline:3px dashed #dc2626;
   outline-offset:-3px;
+}
+
+.day.today{
+  outline:3px solid #1d4ed8;
+  outline-offset:-3px;
+  z-index:3;
+}
+
+.day.today::before{
+  content:"TODAY";
+  position:absolute;
+  top:3px;
+  left:3px;
+  background:#1d4ed8;
+  color:#fff;
+  font-size:6px;
+  font-weight:900;
+  letter-spacing:.04em;
+  padding:1.5px 4px;
+  border-radius:4px;
+  box-shadow:0 1px 3px rgba(0,0,0,.3);
+  white-space:nowrap;
+}
+
+.day.today .num{
+  display:block;
+  margin-top:9px;
 }
 
 .conflict-tag{

@@ -102,6 +102,8 @@ function gameTagFor(key){
 function render(){
   const root=document.getElementById("calendar");
   root.innerHTML="";
+  const now=new Date();
+  const todayKey=dateKey(now.getFullYear(),now.getMonth(),now.getDate());
   months.forEach(({year,month,name})=>{
     const box=document.createElement("section");
     box.className="month";
@@ -121,6 +123,7 @@ function render(){
       if(pto.has(key))el.classList.add("pto");
       if(tentativeDates.has(key)&&pto.has(key))el.classList.add("tentative");
       if(hasConflict(key))el.classList.add("conflict");
+      if(key===todayKey)el.classList.add("today");
       const tag=labelFor(key);
       el.innerHTML=`<span class="num">${d}</span>${badgesFor(key)}${tag?`<span class="tag">${tag}</span>`:""}${conflictTagFor(key)}${gameTagFor(key)}`;
       if(!companyHolidays.has(key)&&!trainingDates.has(key)&&!piPlanningDates.has(key))el.addEventListener("click",()=>togglePTO(key));
