@@ -54,16 +54,19 @@ const coltsGames={
 const defaultPTO=new Set([
 "2026-10-12",
 "2026-10-19","2026-10-20","2026-10-21","2026-10-22","2026-10-23",
+"2026-11-09",
 "2026-11-23","2026-11-24",
+"2026-11-25",
 "2026-12-28","2026-12-29","2026-12-30","2026-12-31"
 ]);;
 
 const tentativeDates=new Set([
-"2026-11-23","2026-11-24"
+"2026-11-09",
+"2026-11-23","2026-11-24",
+"2026-11-25"
 ]);;
 
 let pto=new Set(defaultPTO);
-let vegasReserved=false;
 
 function dateKey(y,m,d){return `${y}-${String(m+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;}
 function isOfficeDay(y,m,d){
@@ -162,8 +165,4 @@ function updateStats(){
   document.getElementById("officeDays").textContent=countOfficeDays();
 }
 document.getElementById("resetBtn").addEventListener("click",()=>{pto=new Set(defaultPTO);render();});
-document.getElementById("vegasBtn").addEventListener("click",()=>{
-  vegasReserved=!vegasReserved;
-  document.getElementById("vegasBtn").textContent=vegasReserved?"Vegas day reserved ✓":"Reserve Vegas day";
-});
 render();
