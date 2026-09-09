@@ -309,6 +309,30 @@ body{
 .badge.school{background:var(--blue)}
 .badge.robertson{background:var(--pink)}
 .badge.holiday{background:var(--red)}
+.badge.conflict{background:#dc2626;animation:conflict-pulse 1.6s ease-in-out infinite}
+
+@keyframes conflict-pulse{
+  0%,100%{box-shadow:0 0 0 1.5px rgba(255,255,255,.9)}
+  50%{box-shadow:0 0 0 1.5px rgba(255,255,255,.9),0 0 0 4px rgba(220,38,38,.45)}
+}
+
+.day.conflict{
+  outline:3px dashed #dc2626;
+  outline-offset:-3px;
+}
+
+.conflict-tag{
+  display:block;
+  font-size:6px;
+  line-height:8px;
+  font-weight:900;
+  letter-spacing:-.02em;
+  margin-top:1px;
+  color:#fef2f2;
+  background:#dc2626;
+  border-radius:3px;
+  padding:1px 2px;
+}
 
 .num{
   font-size:12px;

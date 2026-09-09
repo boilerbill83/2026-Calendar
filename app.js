@@ -52,6 +52,7 @@ const coltsGames={
 
 // Starting proposed plan. December is intentionally tentative.
 const defaultPTO=new Set([
+"2026-10-12",
 "2026-10-19","2026-10-20","2026-10-21","2026-10-22","2026-10-23",
 "2026-11-09","2026-11-10","2026-11-11",
 "2026-11-23","2026-11-24",
@@ -59,6 +60,8 @@ const defaultPTO=new Set([
 ]);;
 
 const tentativeDates=new Set([
+"2026-11-09","2026-11-10","2026-11-11",
+"2026-11-23","2026-11-24"
 ]);;
 
 let pto=new Set(defaultPTO);
@@ -78,12 +81,19 @@ function labelFor(key){
   if(isOfficeDay(...key.split("-").map(Number).map((v,i)=>i===1?v-1:v))) return "OFFICE";
   return "";
 }
+function hasConflict(key){
+  return (trainingDates.has(key)||piPlanningDates.has(key))&&pto.has(key);
+}
 function badgesFor(key){
   let out="";
   if(schoolDates.has(key)) out+=`<span class="badge school" title="Girls out of school">S</span>`;
   if(robertsonOff.has(key)) out+=`<span class="badge robertson" title="Robertson Off">R</span>`;
   if(companyHolidays.has(key)) out+=`<span class="badge holiday" title="Company holiday">H</span>`;
+  if(hasConflict(key)) out+=`<span class="badge conflict" title="Conflict: PTO requested but blocked by a mandatory work day">!</span>`;
   return out?`<span class="badges">${out}</span>`:"";
+}
+function conflictTagFor(key){
+  return hasConflict(key)?`<span class="conflict-tag">PTO REQUESTED</span>`:"";
 }
 function gameTagFor(key){
   const g=coltsGames[key];
@@ -112,8 +122,9 @@ function render(){
       if(piPlanningDates.has(key))el.classList.add("pi-planning");
       if(pto.has(key))el.classList.add("pto");
       if(tentativeDates.has(key)&&pto.has(key))el.classList.add("tentative");
+      if(hasConflict(key))el.classList.add("conflict");
       const tag=labelFor(key);
-      el.innerHTML=`<span class="num">${d}</span>${badgesFor(key)}${tag?`<span class="tag">${tag}</span>`:""}${gameTagFor(key)}`;
+      el.innerHTML=`<span class="num">${d}</span>${badgesFor(key)}${tag?`<span class="tag">${tag}</span>`:""}${conflictTagFor(key)}${gameTagFor(key)}`;
       if(!companyHolidays.has(key)&&!trainingDates.has(key)&&!piPlanningDates.has(key))el.addEventListener("click",()=>togglePTO(key));
       days.appendChild(el);
     }
