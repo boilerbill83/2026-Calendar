@@ -156,6 +156,11 @@ function countOfficeDays(){
   });
   return count;
 }
+function countTentativeHours(){
+  let count=0;
+  tentativeDates.forEach(key=>{if(pto.has(key))count++;});
+  return count*8;
+}
 function updateStats(){
   const used=pto.size*8;
   document.getElementById("balance").textContent=PTO_LIMIT-used;
@@ -163,6 +168,7 @@ function updateStats(){
   document.getElementById("remaining").textContent=PTO_LIMIT-used;
   document.getElementById("days").textContent=pto.size;
   document.getElementById("officeDays").textContent=countOfficeDays();
+  document.getElementById("tentativeHours").textContent=countTentativeHours();
 }
 document.getElementById("resetBtn").addEventListener("click",()=>{pto=new Set(defaultPTO);render();});
 render();
