@@ -151,7 +151,7 @@ function countOfficeDays(){
     const days=new Date(Date.UTC(year,month+1,0)).getUTCDate();
     for(let d=1;d<=days;d++){
       const key=dateKey(year,month,d);
-      if((isOfficeDay(year,month,d)||trainingDates.has(key)||piPlanningDates.has(key))&&!pto.has(key)&&!companyHolidays.has(key)&&!wfhDates.has(key))count++;
+      if(isOfficeDay(year,month,d)&&!pto.has(key)&&!companyHolidays.has(key)&&!trainingDates.has(key)&&!piPlanningDates.has(key))count++;
     }
   });
   return count;
