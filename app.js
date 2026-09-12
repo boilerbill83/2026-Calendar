@@ -85,13 +85,12 @@ function labelFor(key){
 function hasConflict(key){
   return (trainingDates.has(key)||piPlanningDates.has(key))&&pto.has(key);
 }
-function badgesFor(key){
+function whoBarFor(key){
   let out="";
-  if(schoolDates.has(key)) out+=`<span class="badge school" title="Girls out of school">S</span>`;
-  if(robertsonOff.has(key)) out+=`<span class="badge robertson" title="Robertson Off">R</span>`;
-  if(companyHolidays.has(key)) out+=`<span class="badge holiday" title="Company holiday">H</span>`;
-  if(hasConflict(key)) out+=`<span class="badge conflict" title="Conflict: PTO requested but blocked by a mandatory work day">!</span>`;
-  return out?`<span class="badges">${out}</span>`:"";
+  if(schoolDates.has(key)) out+=`<i class="who-seg kids" title="Girls out of school"></i>`;
+  if(robertsonOff.has(key)) out+=`<i class="who-seg wife" title="Robertson Off"></i>`;
+  if(companyHolidays.has(key)) out+=`<i class="who-seg me" title="Company holiday"></i>`;
+  return out?`<span class="who-bar">${out}</span>`:"";
 }
 function conflictTagFor(key){
   return hasConflict(key)?`<span class="conflict-tag">PTO REQUESTED</span>`:"";
@@ -128,7 +127,7 @@ function render(){
       if(hasConflict(key))el.classList.add("conflict");
       if(key===todayKey)el.classList.add("today");
       const tag=labelFor(key);
-      el.innerHTML=`<span class="num">${d}</span>${badgesFor(key)}${tag?`<span class="tag">${tag}</span>`:""}${conflictTagFor(key)}${gameTagFor(key)}`;
+      el.innerHTML=`${whoBarFor(key)}<span class="num">${d}</span>${tag?`<span class="tag">${tag}</span>`:""}${conflictTagFor(key)}${gameTagFor(key)}`;
       if(!companyHolidays.has(key)&&!piPlanningDates.has(key))el.addEventListener("click",()=>togglePTO(key));
       days.appendChild(el);
     }
