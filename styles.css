@@ -131,10 +131,7 @@ body{
 .legend i.office{background:var(--purple)}
 .legend i.training{background:repeating-linear-gradient(135deg,#f97316,#f97316 4px,#fb923c 4px,#fb923c 8px)}
 .legend i.pi-planning{background:repeating-linear-gradient(135deg,#4338ca,#4338ca 4px,#6366f1 4px,#6366f1 8px)}
-.legend-bar{width:7px!important;height:18px!important;border-radius:3px!important;border:none!important}
-.legend-bar.kids{background:linear-gradient(180deg,#38bdf8,#0284c7)}
-.legend-bar.wife{background:linear-gradient(180deg,#f472b6,#be185d)}
-.legend-bar.me{background:linear-gradient(180deg,#a78bfa,#6d28d9)}
+.legend-badge{width:18px!important;height:18px!important;font-size:11px!important;border-radius:50%!important;box-shadow:0 1px 4px rgba(15,23,42,.15)!important}
 
 .controls{
   display:flex;
@@ -224,7 +221,7 @@ body{
   border:1px solid #e2e8f0;
   border-radius:8px;
   background:#fff;
-  padding:5px 5px 5px 10px;
+  padding:5px;
   cursor:pointer;
   position:relative;
   transition:transform .12s ease,filter .12s ease;
@@ -287,23 +284,37 @@ body{
   letter-spacing:-.02em;
 }
 
-.who-bar{
+.badges{
   position:absolute;
-  left:2px;
-  top:4px;
-  bottom:4px;
-  width:4px;
+  top:3px;
+  right:3px;
   display:flex;
-  flex-direction:column;
-  gap:1.5px;
-  border-radius:2px;
-  overflow:hidden;
+  gap:2px;
 }
 
-.who-seg{flex:1}
-.who-seg.kids{background:linear-gradient(180deg,#38bdf8,#0284c7)}
-.who-seg.wife{background:linear-gradient(180deg,#f472b6,#be185d)}
-.who-seg.me{background:linear-gradient(180deg,#a78bfa,#6d28d9)}
+.badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:13px;
+  height:13px;
+  border-radius:50%;
+  font-size:8px;
+  font-weight:900;
+  line-height:1;
+  color:#fff;
+  box-shadow:0 0 0 1.5px rgba(255,255,255,.9);
+}
+
+.badge.school{background:linear-gradient(135deg,#38bdf8,#0284c7)}
+.badge.robertson{background:linear-gradient(135deg,#f472b6,#be185d)}
+.badge.holiday{background:linear-gradient(135deg,#a78bfa,#6d28d9)}
+.badge.conflict{background:#dc2626;animation:conflict-pulse 1.6s ease-in-out infinite}
+
+@keyframes conflict-pulse{
+  0%,100%{box-shadow:0 0 0 1.5px rgba(255,255,255,.9)}
+  50%{box-shadow:0 0 0 1.5px rgba(255,255,255,.9),0 0 0 4px rgba(220,38,38,.45)}
+}
 
 .day.conflict{
   outline:3px dashed #dc2626;
@@ -320,7 +331,7 @@ body{
   content:"TODAY";
   position:absolute;
   top:3px;
-  left:9px;
+  left:3px;
   background:#d97706;
   color:#fff;
   font-size:6px;
