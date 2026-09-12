@@ -306,9 +306,9 @@ body{
   box-shadow:0 0 0 1.5px rgba(255,255,255,.9);
 }
 
-.badge.school{background:var(--blue)}
-.badge.robertson{background:var(--pink)}
-.badge.holiday{background:var(--red)}
+.badge.school{background:linear-gradient(135deg,#38bdf8,#0284c7)}
+.badge.robertson{background:linear-gradient(135deg,#f472b6,#be185d)}
+.badge.holiday{background:linear-gradient(135deg,#a78bfa,#6d28d9)}
 .badge.conflict{background:#dc2626;animation:conflict-pulse 1.6s ease-in-out infinite}
 
 @keyframes conflict-pulse{

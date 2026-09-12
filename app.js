@@ -129,7 +129,7 @@ function render(){
       if(key===todayKey)el.classList.add("today");
       const tag=labelFor(key);
       el.innerHTML=`<span class="num">${d}</span>${badgesFor(key)}${tag?`<span class="tag">${tag}</span>`:""}${conflictTagFor(key)}${gameTagFor(key)}`;
-      if(!companyHolidays.has(key)&&!trainingDates.has(key)&&!piPlanningDates.has(key))el.addEventListener("click",()=>togglePTO(key));
+      if(!companyHolidays.has(key)&&!piPlanningDates.has(key))el.addEventListener("click",()=>togglePTO(key));
       days.appendChild(el);
     }
     root.appendChild(box);
@@ -137,7 +137,7 @@ function render(){
   updateStats();
 }
 function togglePTO(key){
-  if(companyHolidays.has(key)||trainingDates.has(key)||piPlanningDates.has(key))return;
+  if(companyHolidays.has(key)||piPlanningDates.has(key))return;
   if(pto.has(key))pto.delete(key);
   else{
     if(pto.size*8>=PTO_LIMIT){alert("All 112 PTO hours are already allocated.");return;}
