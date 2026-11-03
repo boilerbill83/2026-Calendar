@@ -1,6 +1,6 @@
 # 2026 Family PTO Planner
 
-A standalone HTML/CSS/JavaScript calendar for planning September–December 2026 PTO around HSE school breaks, company holidays, and family availability.
+A standalone HTML/CSS/JavaScript calendar for planning November–December 2026 PTO around HSE school breaks, company holidays, and family availability.
 
 ## GitHub Pages
 
@@ -28,12 +28,12 @@ The calendar data and proposed PTO are all in `app.js`, so future changes can be
 
 - PTO balance: 112 hours.
 - PTO day: 8 hours.
-- HSE Fall Break: October 19–23, 2026.
 - HSE Thanksgiving break: November 25–27, 2026.
 - HSE Winter Break: December 21, 2026–January 1, 2027.
 - Company holidays in this view: November 26, November 27, December 25.
-- Proposed PTO: October 19–23, November 23–24, December 28–31.
-- One separate PTO day is intended to remain reserved for a Friday or Monday Vegas trip.
+- Confirmed PTO: November 23–25, December 28–31.
+- Mandatory work training: November 30–December 1.
+- PI Planning: December 7–10.
 
 ## Important
 

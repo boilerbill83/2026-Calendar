@@ -1,5 +1,5 @@
 const PTO_LIMIT=112;
-const months=[{year:2026,month:8,name:"September"},{year:2026,month:9,name:"October"},{year:2026,month:10,name:"November"},{year:2026,month:11,name:"December"}];
+const months=[{year:2026,month:10,name:"November"},{year:2026,month:11,name:"December"}];
 
 const schoolDates=new Set([
 "2026-10-19","2026-10-20","2026-10-21","2026-10-22","2026-10-23",
@@ -17,7 +17,8 @@ const robertsonOff=new Set([
 
 // Mandatory work training. PTO cannot be taken on these dates.
 const trainingDates=new Set([
-"2026-09-21","2026-09-22","2026-09-23"
+"2026-09-21","2026-09-22","2026-09-23",
+"2026-11-30","2026-12-01"
 ]);
 
 // PI Planning. PTO cannot be taken on these dates.
@@ -61,9 +62,7 @@ const defaultPTO=new Set([
 ]);;
 
 const tentativeDates=new Set([
-"2026-11-09",
-"2026-11-23","2026-11-24",
-"2026-11-25"
+"2026-11-09"
 ]);;
 
 let pto=new Set(defaultPTO);
