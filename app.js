@@ -29,7 +29,8 @@ const piPlanningDates=new Set([
 
 // Working from home (not blocking; shown as a badge only).
 const wfhDates=new Set([
-"2026-09-14","2026-09-15","2026-09-16"
+"2026-09-14","2026-09-15","2026-09-16",
+"2026-11-16"
 ]);
 
 // Colts regular-season games, Sep-Dec 2026.
@@ -78,6 +79,7 @@ function labelFor(key){
   if(piPlanningDates.has(key)) return "PI PLANNING";
   if(pto.has(key)) return tentativeDates.has(key) ? "TENTATIVE PTO" : "PTO";
   if(companyHolidays.has(key)) return "";
+  if(wfhDates.has(key)) return "WFH";
   if(isOfficeDay(...key.split("-").map(Number).map((v,i)=>i===1?v-1:v))) return "OFFICE";
   return "";
 }
@@ -153,7 +155,7 @@ function countOfficeDays(){
     for(let d=1;d<=days;d++){
       const key=dateKey(year,month,d);
       if(key<=todayKey)continue;
-      if(isOfficeDay(year,month,d)&&!pto.has(key)&&!companyHolidays.has(key)&&!trainingDates.has(key)&&!piPlanningDates.has(key))count++;
+      if(isOfficeDay(year,month,d)&&!pto.has(key)&&!companyHolidays.has(key)&&!trainingDates.has(key)&&!piPlanningDates.has(key)&&!wfhDates.has(key))count++;
     }
   });
   return count;
