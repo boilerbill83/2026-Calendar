@@ -145,11 +145,14 @@ function togglePTO(key){
   render();
 }
 function countOfficeDays(){
+  const now=new Date();
+  const todayKey=dateKey(now.getFullYear(),now.getMonth(),now.getDate());
   let count=0;
   months.forEach(({year,month})=>{
     const days=new Date(Date.UTC(year,month+1,0)).getUTCDate();
     for(let d=1;d<=days;d++){
       const key=dateKey(year,month,d);
+      if(key<=todayKey)continue;
       if(isOfficeDay(year,month,d)&&!pto.has(key)&&!companyHolidays.has(key)&&!trainingDates.has(key)&&!piPlanningDates.has(key))count++;
     }
   });
