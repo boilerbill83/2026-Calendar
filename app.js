@@ -18,7 +18,7 @@ const robertsonOff=new Set([
 // Mandatory work training. PTO cannot be taken on these dates.
 const trainingDates=new Set([
 "2026-09-21","2026-09-22","2026-09-23",
-"2026-11-30","2026-12-01"
+"2026-11-30","2026-12-01","2026-12-02"
 ]);
 
 // PI Planning. PTO cannot be taken on these dates.

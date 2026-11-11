@@ -32,7 +32,7 @@ The calendar data and proposed PTO are all in `app.js`, so future changes can be
 - HSE Winter Break: December 21, 2026–January 1, 2027.
 - Company holidays in this view: November 26, November 27, December 25.
 - Confirmed PTO: November 23–25, December 28–31.
-- Mandatory work training: November 30–December 1.
+- Mandatory work training: November 30–December 2.
 - PI Planning: December 7–10.
 
 ## Important
